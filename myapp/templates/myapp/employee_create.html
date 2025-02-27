@@ -1,0 +1,37 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Home Page{% endblock title %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center my-1" style="min-height: 100vh;">
+    <div class="card col-sm-4">
+        <div class="card-body">
+            <h3 class="card-title">Employee Create Form</h3>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input type="text" class="form-control" name="age" id="age" placeholder="Age">
+                </div>
+
+                <h3>Extra Fields:</h3>
+                <div id="extra-fields-container">
+                    <!-- Dynamic extra fields will be added here -->
+                </div>
+                <button type="button" id="add-field-btn" class="btn btn-primary">➕ Add Extra Field</button>
+
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+            <p style="text-align: center;" class="btn btn-secondary my-2"><a href="{% url 'employee-list' %}">Back</a></p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

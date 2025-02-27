@@ -1,0 +1,43 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}EmployeeUpdatePage{% endblock title %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center my-1" style="min-height: 100vh;">
+    <div class="card col-sm-4">
+        <div class="card-body">
+            <h3 class="card-title">Employee Update Form</h3>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" value="{{ employee.name }}" placeholder="Name">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="email" value="{{ employee.email }}" id="email" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input type="text" class="form-control" name="age" value="{{ employee.age }}" id="age" placeholder="Age">
+                </div>
+
+                <h3>Extra Fields:</h3>
+<div id="extra-fields-container">
+    {% for key, value in employee.extra_info.items %}
+    <div class="extra-fields mb-3">
+        <input type="text" name="extra_key[]" class="form-control mt-1" placeholder="Key" value="{{ key }}" required>
+        <input type="text" name="extra_value[]" class="form-control mt-1" placeholder="Value" value="{{ value }}" required>
+        <button type="button" class="remove-btn mt-1" style="background: gray; color: white; padding: 5px 10px; border: none; cursor: pointer;">❌</button>
+    </div>
+    {% endfor %}
+</div>
+<button type="button" id="add-field-btn" class="btn btn-primary">➕ Add Extra Field</button>
+
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+            <p style="text-align: center;" class="btn btn-secondary my-2"><a href="{% url 'employee-list' %}">Back</a></p>
+        </div>
+    </div>
+</div>
+{% endblock content %}
